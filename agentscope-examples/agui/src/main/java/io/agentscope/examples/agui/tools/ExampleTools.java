@@ -99,9 +99,10 @@ public class ExampleTools {
      * @return Current context info
      */
     @Tool(name = "get_current_context", description = "Get the current context")
-    public ToolResultBlock getCurrentContext( UserContext context) {
+    public ToolResultBlock getCurrentContext(UserContext context) {
 
-        return ToolResultBlock.text("Current context: " + context.getContext()+" Current user: "+context.getUser());
+        return ToolResultBlock.text(
+                "Current context: " + context.getContext() + " Current user: " + context.getUser());
     }
 
     /**
