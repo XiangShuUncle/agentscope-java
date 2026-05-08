@@ -25,6 +25,7 @@ import io.agentscope.core.memory.InMemoryMemory;
 import io.agentscope.core.model.DashScopeChatModel;
 import io.agentscope.core.model.ToolSchema;
 import io.agentscope.core.tool.ToolExecutionContext;
+import io.agentscope.core.tool.ToolGroup;
 import io.agentscope.core.tool.Toolkit;
 import io.agentscope.examples.agui.tools.ExampleTools;
 import io.agentscope.examples.agui.tools.UserContext;
@@ -176,7 +177,10 @@ public class AgentConfiguration {
         List<ToolSchema> toolSchemas = toolConverter.toToolSchemaList(input.getTools());
         if (toolkit.getToolGroup(TOOL_GROUP_NAME) == null) {
             toolkit.createToolGroup(TOOL_GROUP_NAME, "Tools for AG-UI", true);
-        }
+        } // 注册到工具组
+        ToolGroup toolGroup = toolkit.getToolGroup(TOOL_GROUP_NAME);
+        toolSchemas.forEach(toolSchema -> toolGroup.addTool(toolSchema.getName()));
+        toolkit.registerSchemas(toolSchemas);
 
         //        if (!toolSchemas.isEmpty()) {
         //            toolkit.registerSchemas(toolSchemas);
